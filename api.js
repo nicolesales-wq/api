@@ -6,11 +6,10 @@ import apiRoutes from './routes/api.routes.js'; // Importa o arquivo de rotas
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para analisar corpos de requisição JSON (opcional, mas boa prática)
+// Middleware para analisar corpos de requisição JSON (CRUCIAL para POST/PUT)
 app.use(express.json());
 
 // Configuração das rotas
-// Todas as rotas definidas em apiRoutes estarão acessíveis a partir da raiz ('/')
 app.use('/', apiRoutes);
 
 // Middleware para lidar com rotas não encontradas (404)
@@ -33,8 +32,7 @@ app.use((err, req, res, next) => {
 // Inicia o servidor
 app.listen(PORT, () => {
     console.log(`\n🚀 API rodando em http://localhost:${PORT}`);
-    console.log('Rotas disponíveis: /, /about, /developer, /greet/:nome');
-    console.log('Para testar, acesse o Postman ou seu navegador.');
+    console.log('Rotas PÚBLICAS: /, /about, /developer, /greet/:nome');
+    console.log('Rotas PROTEGIDAS: /items (GET, POST), /items/:id (PUT)');
+    console.log('Token Bearer NECESSÁRIO: token-secreto-123');
 });
-// Para usar imports (como 'import express from 'express''), 
-// adicione "type": "module" ao seu package.json.
